@@ -1,26 +1,19 @@
-import react from 'react'
-import {BrowserRouter as Router,Routes,Route, BrowserRouter} from 'react-router-dom';
-import {Toaster} from 'react-hot-toast';
-import LandingPage from './pages/LandingPage';
-import Dashboard from './pages/Dashboard'
-import InterviewPrep from './pages/interview/InterviewPrep'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import InterviewPrep from './pages/interview/InterviewPrep';
+
 function App() {
   return (
-    <>
-    <BrowserRouter>
-     <Router>
+    <Router>
       <Routes>
-        {/* default route */}
-        <Route path="/" element={<LandingPage/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/interview-prep/:sessionId" element={<InterviewPrep/>}/>
-        <Route path="/" element={<LandingPage/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/interview-prep/:sessionId" element={<InterviewPrep />} />
       </Routes>
-     </Router>
-     </BrowserRouter> 
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
-
+export default App;
