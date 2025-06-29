@@ -1,9 +1,9 @@
-const express=require('express');
-const domainController=require("../controllers/domainController");
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
+const domainController = require('../controllers/domainController');
 
-router.post('/addDomain',domainController.addDomain);
-router.post('/seeDomain',domainController.getDomain);
 
+router.post('/adddomain', domainController.addDomain);
+router.get('/getdomains/user/:userId', domainController.getDomains);
 
 module.exports=router;

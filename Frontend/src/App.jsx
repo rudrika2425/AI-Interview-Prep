@@ -2,13 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
-import AddQuestions from './components/AddQuestions';
+import AddQuestions from './components/AddDomain';
 import ViewList from './components/ViewList';
 import MakeNotes from './components/MakeNotes';
 import PinnedQuestions from './components/PinnedQuestions';
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
+     <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,6 +23,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </UserProvider>
   );
 }
 

@@ -1,5 +1,7 @@
 import { Plus, X, Building, Briefcase, Calendar, FileText } from "lucide-react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const AddQuestions = () => {
   const [showForm, setShowForm] = useState(false);
@@ -9,6 +11,10 @@ const AddQuestions = () => {
     yearsOfExperience: '',
     jobDescription: ''
   });
+  
+  const { user } = useContext(UserContext);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,24 +24,63 @@ const AddQuestions = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // You can add your form submission logic here
-    alert('Interview questions set created successfully!');
-    setShowForm(false);
-    // Reset form
-    setFormData({
-      companyName: '',
-      jobTitle: '',
-      yearsOfExperience: '',
-      jobDescription: ''
-    });
+  const handleSubmit = async () => {
+    if (!formData.companyName || !formData.jobTitle || 
+        !formData.yearsOfExperience || !formData.jobDescription) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    if (!user?.id || !token) {
+      navigate('/login');
+      return;
+    }
+
+    const experienceMap = {
+      '0-1': '0-1 years (Entry Level)',
+      '2-3': '2-3 years (Junior)',
+      '4-6': '4-6 years (Mid-Level)',
+      '7-10': '7-10 years (Senior)',
+      '10+': '10+ years (Expert)'
+    };
+
+    try {
+      const response = await fetch('http://localhost:8000/api/domain/adddomain', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          companyName: formData.companyName,
+          jobTitle: formData.jobTitle,
+          yearsOfExperience: experienceMap[formData.yearsOfExperience],
+          jobDescription: formData.jobDescription,
+          userId: user.id
+        })
+      });
+
+      if (response.ok) {
+        navigate('/dashboard/view-list');
+      } else {
+        alert('Failed to create question set');
+      }
+    } 
+    catch {
+      alert('An error occurred');
+    }
+  };
+
+  const handleCreateClick = () => {
+    if (!user) {
+      console.log("user not found");
+      return;
+    }
+    setShowForm(true);
   };
 
   const handleCancel = () => {
     setShowForm(false);
-    // Reset form data
     setFormData({
       companyName: '',
       jobTitle: '',
@@ -60,10 +105,10 @@ const AddQuestions = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Add Your Domain</h3>
             <p className="text-gray-600 mb-4">Get All Your Required Questions to ace up your success</p>
             <button 
-              onClick={() => setShowForm(true)}
+              onClick={handleCreateClick}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Create Set
+              {user ? 'Create Set' : 'Please login to create'}
             </button>
           </div>
         </div>
@@ -80,7 +125,6 @@ const AddQuestions = () => {
           </div>
 
           <div className="space-y-6">
-            {/* Company Name */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                 <Building className="w-4 h-4 mr-2 text-gray-500" />
@@ -97,7 +141,6 @@ const AddQuestions = () => {
               />
             </div>
 
-            {/* Job Title */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                 <Briefcase className="w-4 h-4 mr-2 text-gray-500" />
@@ -114,7 +157,6 @@ const AddQuestions = () => {
               />
             </div>
 
-            {/* Years of Experience */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                 <Calendar className="w-4 h-4 mr-2 text-gray-500" />
@@ -136,7 +178,6 @@ const AddQuestions = () => {
               </select>
             </div>
 
-            {/* Job Description */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                 <FileText className="w-4 h-4 mr-2 text-gray-500" />
@@ -148,22 +189,19 @@ const AddQuestions = () => {
                 onChange={handleInputChange}
                 rows={4}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-vertical"
-                placeholder="Enter detailed job description, responsibilities, and requirements..."
+                placeholder="Enter detailed job description..."
                 required
               />
             </div>
 
-            {/* Form Actions */}
             <div className="flex gap-4 pt-4">
               <button
-                type="button"
                 onClick={handleSubmit}
                 className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium"
               >
                 Create Question Set
               </button>
               <button
-                type="button"
                 onClick={handleCancel}
                 className="flex-1 bg-gray-100 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors font-medium"
               >

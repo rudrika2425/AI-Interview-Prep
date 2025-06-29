@@ -1,9 +1,11 @@
 import { Search, Bell, Settings, User } from "lucide-react";
 import { useContext } from "react";
+import {Link} from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 const Navbar = () => {
 
   const {user} = useContext(UserContext);
+  
   return (
     <nav className="bg-white shadow-sm border-b border-gray-200 h-16 fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center justify-between h-full px-6">
@@ -11,9 +13,11 @@ const Navbar = () => {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3">
             <span className="text-white font-bold text-sm">AI</span>
           </div>
+          <Link to='/'>
           <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             AI Interview Prep
           </h1>
+          </Link>
         </div>
         
         <div className="flex items-center space-x-4">
