@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import HERO_IMG from "../assets/hero.png";
 import { APP_FEATURES } from "../utils/data";
 import { useNavigate } from "react-router-dom";
 import { LuSparkles } from "react-icons/lu";
-import Auth from "./Auth"
+import Auth from "./Auth";
 
-const LandingPage = () => {
+const Home = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      
-      <div className="relative w-full min-h-screen bg-[#fff8e4]">
-        <div className="max-w-7xl mx-auto px-6 pt-10 pb-20">
-          
+    <div className={`relative ${openModal ? 'blur-sm' : ''}`}>
+      <div className="relative w-full h-96 bg-[#fff8e4] ">
+        <div className="max-w-7xl mx-auto px-6 pt-10 pb-8">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-lg font-bold text-black">Interview Prep AI</h2>
             <button
@@ -24,13 +22,9 @@ const LandingPage = () => {
               Login / Sign Up
             </button>
           </div>
-           
-          {/* Auth will come here  */}
-          {openModal && <Auth onClose={()=>setOpenModal(false)}/>}
 
-          
           {/* Hero Content */}
-          <div className="flex flex-col md:flex-row items-center gap-10">
+          <div className="flex flex-col md:flex-row items-center gap-10 h-36 -mb-28">
             {/* Left */}
             <div className="w-full md:w-1/2">
               <div className="inline-flex items-center gap-1 text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full border border-orange-300 mb-3">
@@ -53,10 +47,7 @@ const LandingPage = () => {
                 From preparation to mastery — your ultimate interview toolkit is
                 here.
               </p>
-              <button
-                onClick={handleCTA}
-                className="bg-black text-white text-sm px-6 py-2 rounded-full hover:bg-gray-900 transition-colors"
-              >
+              <button className="bg-black text-white text-sm px-6 py-2 rounded-full hover:bg-gray-900 transition-colors">
                 Get Started
               </button>
             </div>
@@ -64,17 +55,8 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Image Mockup Section */}
-      <div className="flex justify-center -mt-28 relative z-10">
-        <img
-          src={HERO_IMG}
-          alt="Hero"
-          className="w-[80vw] rounded-lg shadow-md"
-        />
-      </div>
-
       {/* Features Section */}
-      <div className="w-full bg-[#fffcef] pt-16 pb-24">
+      <div className="w-full bg-[#fffcef] pb-24">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl font-semibold text-center mb-12">
             Features that make you shine
@@ -116,9 +98,12 @@ const LandingPage = () => {
       <div className="text-sm bg-gray-50 text-gray-500 text-center py-5">
         Made with ❤️ Happy Coding
       </div>
-      
+      </div>
+
+      {/* Auth Modal */}
+          {openModal && <Auth onClose={() => setOpenModal(false)} />}
     </>
   );
 };
 
-export default LandingPage;
+export default Home;

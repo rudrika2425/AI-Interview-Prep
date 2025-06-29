@@ -1,40 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+
 
 const Auth = ({ onClose }) => {
+
+  const {login} = useContext(UserContext);
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email || !password || (!isLogin && (!fullName || !confirmPassword))) {
       alert("Please fill in all required fields.");
       return;
     }
+
     if (!isLogin && password !== confirmPassword) {
       alert("Passwords do not match.");
       return;
     }
-    if (isLogin) {
-      console.log("Login Submitted:", { email, password });
-      // call login API here
-    } else {
-      console.log("Signup Submitted:", { email, fullName, password });
-      // call signup API here
-    }
-    onClose(); 
-    // to close the popover form
 
+    if (isLogin) {
+      try {
+        const response = await fetch(`${API}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (!response) {
+          throw new Error("No response from server");
+        }
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Login failed");
+        }
+        
+        const data = await response.json();
+        console.log(data.seeUser);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user",JSON.stringify(data.seeUser));
+        login(data.seeUser);
+        onClose();
+        navigate("/dashboard");
+      } catch (e) {
+        alert(e.message || "Failed to connect to server");
+      }
+    } else {
+      try {
+        const response = await fetch(`${API}/api/auth/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, fullName, confirmPassword }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Signup failed");
+        }
+
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        
+        onClose();
+        navigate("/dashboard");
+      } catch (e) {
+        alert(e.message || "Failed to connect to server");
+      }
+    }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4 relative">
+    <div className="fixed inset-0 bg-white/0 backdrop-blur-md z-50 flex items-center justify-center">
+      <div className="bg-white rounded-xl p-8 w-full max-w-md mx-4 relative shadow-2xl border border-gray-100">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold"
@@ -70,7 +121,7 @@ const Auth = ({ onClose }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 placeholder="Enter your full name"
                 value={fullName}
-                onChange={(e)=>setFullName(e.target.value)}
+                onChange={(e) => setFullName(e.target.value)}
               />
             </div>
           )}
