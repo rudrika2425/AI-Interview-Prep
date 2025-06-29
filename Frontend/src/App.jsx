@@ -7,6 +7,8 @@ import ViewList from './components/ViewList';
 import MakeNotes from './components/MakeNotes';
 import PinnedQuestions from './components/PinnedQuestions';
 import { UserProvider } from "./context/UserContext";
+import { ToastContainer } from 'react-toastify';
+import ViewDomain from './pages/ViewDomain';
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/questions/:domainId" element={<ViewDomain />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<AddQuestions />} />
           <Route path="add-questions" element={<AddQuestions />} />
@@ -23,6 +26,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    <ToastContainer position="bottom-right" autoClose={3000} />
     </UserProvider>
   );
 }

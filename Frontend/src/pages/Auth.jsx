@@ -145,7 +145,7 @@ const Auth = ({ onClose }) => {
             <input
               type="password"
               className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-gray-50 hover:bg-white"
-              placeholder="Min 8 characters"
+              placeholder="Make Strong Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
