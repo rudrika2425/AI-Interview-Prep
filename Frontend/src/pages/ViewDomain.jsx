@@ -11,13 +11,14 @@ const ViewDomain = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
   const userId = user?.id;
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
 
   // Fetch domain questions
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/questions/${domainId}?userId=${userId}`,
+          `${API}/api/questions/${domainId}?userId=${userId}`,
           {
             method: 'GET',
             headers: {
@@ -60,7 +61,7 @@ const ViewDomain = () => {
 const togglePin = async (skillIndex, questionIndex) => {
   try {
     const response = await fetch(
-      `http://localhost:8000/api/questions/${domainId}/pin/${skillIndex}/${questionIndex}`,
+      `${API}/api/questions/${domainId}/pin/${skillIndex}/${questionIndex}`,
       {
         method: 'PATCH',
         headers: {

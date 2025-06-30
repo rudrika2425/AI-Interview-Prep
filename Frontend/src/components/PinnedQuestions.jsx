@@ -8,6 +8,7 @@ const PinnedQuestions = () => {
   const [loading, setLoading] = useState(true);
   const {user} = useContext(UserContext);
   const userId = user?.id;
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
 
   useEffect(() => {
     const fetchPinnedQuestions = async () => {
@@ -16,7 +17,7 @@ const PinnedQuestions = () => {
         
         setLoading(true);
         const response = await fetch(
-          `http://localhost:8000/api/questions/pinned?userId=${userId}`,
+          `${API}/api/questions/pinned?userId=${userId}`,
           {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -30,6 +31,8 @@ const PinnedQuestions = () => {
 
         const data = await response.json();
         setPinnedQuestions(data.pinnedQuestions || []);
+          
+        
       } catch (error) {
         toast.error(error.message);
         console.error('Fetch error:', error);
@@ -42,42 +45,40 @@ const PinnedQuestions = () => {
   }, [userId]);
 
   const handleUnpin = async (domainId, skillIndex, questionIndex) => {
-  try {
-    const response = await fetch(
-      `http://localhost:8000/api/questions/${domainId}/unpin/${skillIndex}/${questionIndex}?userId=${userId}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+    console.log(skillIndex);
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/questions/${domainId}/unpin/${skillIndex}/${questionIndex}?userId=${userId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
         }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to unpin question');
       }
-    );
 
-    if (!response.ok) {
-      throw new Error('Failed to unpin question');
+      const result = await response.json();
+      
+      // Update local state by filtering out the unpinned question
+      setPinnedQuestions(prev => 
+        prev.filter(q => 
+          !(q.domainId === domainId && 
+            q.skillIndex == skillIndex && 
+            q.questionIndex == questionIndex)
+        )
+      );
+
+      toast.success('Question unpinned successfully');
+    } catch (error) {
+      toast.error(error.message);
+      console.error('Unpin error:', error);
     }
-
-    const result = await response.json();
-    const { domainId: dId, skillIndex: sIndex, questionIndex: qIndex } = result.updatedQuestion;
-
-    setPinnedQuestions((prev) =>
-      prev.filter(
-        (q) =>
-          !(
-            q.domainId === dId &&
-            q.skillIndex === sIndex &&
-            q.questionIndex === qIndex
-          )
-      )
-    );
-
-    toast.success('Question unpinned');
-  } catch (error) {
-    toast.error(error.message);
-    console.error('Unpin error:', error);
-  }
-};
+  };
 
   if (loading) {
     return (

@@ -12,7 +12,8 @@ const Sidebar = () => {
     { path: '/dashboard/add-questions', icon: Plus, label: 'Add Interview Questions', color: 'text-blue-600' },
     { path: '/dashboard/view-list', icon: List, label: 'View Your List', color: 'text-green-600' },
     { path: '/dashboard/make-notes', icon: StickyNote, label: 'Make Notes', color: 'text-yellow-600' },
-    { path: '/dashboard/pinned-questions', icon: Pin, label: 'Pinned Important Questions', color: 'text-red-600' }
+    { path: '/dashboard/view-notes', icon: StickyNote, label: 'your Notes', color: 'text-orange-600' },
+    { path: '/dashboard/pinned-questions', icon: Pin, label: 'Pinned Important Questions', color: 'text-red-600' },
   ];
 
   const Logout = () => {

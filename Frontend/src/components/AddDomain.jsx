@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const AddQuestions = () => {
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     companyName: '',
@@ -45,7 +46,7 @@ const AddQuestions = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/api/domain/adddomain', {
+      const response = await fetch(`${API}/api/domain/adddomain`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

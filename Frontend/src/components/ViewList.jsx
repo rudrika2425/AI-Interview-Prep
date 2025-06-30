@@ -6,6 +6,7 @@ const ViewList = () => {
   const [domains, setDomains] = useState([]);
   const { user } = useContext(UserContext);
   const token = localStorage.getItem("token");
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
 
   useEffect(() => {
     const fetchDomains = async () => {
@@ -13,7 +14,7 @@ const ViewList = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8000/api/domain/getdomains/user/${user.id}`,
+          `${API}/api/domain/getdomains/user/${user.id}`,
           {
             method: "GET",
             headers: {

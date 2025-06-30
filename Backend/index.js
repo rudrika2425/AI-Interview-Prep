@@ -5,6 +5,7 @@ require('dotenv').config();
 const authRoutes=require('./routes/authRoutes');
 const domainRoutes=require('./routes/domainRoutes');
 const questionRoutes=require('./routes/questionRoutes');
+const noteRoutes=require('./routes/noteRoutes');
 
 const app=express();
 app.use(cors());
@@ -15,6 +16,7 @@ const PORT=process.env.PORT;
 app.use('/api/auth',authRoutes);
 app.use('/api/domain',domainRoutes);
 app.use('/api/questions', questionRoutes);
+app.use('/api/note', noteRoutes);
 
 const connectDB=async()=>{
     try{

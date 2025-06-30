@@ -9,6 +9,7 @@ import PinnedQuestions from './components/PinnedQuestions';
 import { UserProvider } from "./context/UserContext";
 import { ToastContainer } from 'react-toastify';
 import ViewDomain from './pages/ViewDomain';
+import ViewNotes from './components/ViewNotes';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="add-questions" element={<AddQuestions />} />
           <Route path="view-list" element={<ViewList />} />
           <Route path="make-notes" element={<MakeNotes />} />
+          <Route path="view-notes" element={<ViewNotes />} />
           <Route path="pinned-questions" element={<PinnedQuestions />} />
         </Route>
       </Routes>

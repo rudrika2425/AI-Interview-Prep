@@ -91,45 +91,12 @@ const Footer = () => {
                 and industry-specific question generation. Your success is our mission.
               </p>
 
-              {/* Quick Features */}
-              <div className="space-y-3">
-                <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
-                  <LuZap className="w-4 h-4 text-yellow-400" />
-                  Key Features
-                </h4>
-                <div className="grid grid-cols-1 gap-3">
-                  {quickFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3 text-gray-300">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center text-blue-400">
-                        {feature.icon}
-                      </div>
-                      <span className="text-sm">{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
+              
               {/* Contact Info */}
-              <div className="space-y-3">
-                <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3 text-gray-300">
-                    <LuMail className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm">support@interviewprepai.com</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-300">
-                    <LuPhone className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm">+1 (555) 123-4567</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-gray-300">
-                    <LuMapPin className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm">San Francisco, CA</span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
 
-            {/* Links Grid */}
+           
             <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Product Links */}
               <div>
@@ -214,34 +181,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div className="border-t border-white/10">
-          <div className="max-w-7xl mx-auto px-6 py-12">
-            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl p-8 border border-white/10 backdrop-blur-sm">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="text-center md:text-left">
-                  <h4 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                    <LuSparkles className="w-6 h-6 text-yellow-400" />
-                    Stay Updated
-                  </h4>
-                  <p className="text-gray-300">
-                    Get the latest interview tips, AI features, and success stories delivered to your inbox.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 backdrop-blur-sm min-w-0 sm:min-w-[300px]"
-                  />
-                  <button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 whitespace-nowrap">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10">

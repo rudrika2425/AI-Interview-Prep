@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 
 const DomainQuestions = () => {
+  const API = import.meta.env.VITE_API || 'http://localhost:8000';
   const [questions, setQuestions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +18,7 @@ const DomainQuestions = () => {
       
       try {
         const response = await fetch(
-          `http://localhost:8000/api/questions/${domainId}`,
+          `${API}/api/questions/${domainId}`,
           {
             method: 'GET',
             headers: {
@@ -47,7 +48,7 @@ const DomainQuestions = () => {
   const togglePin = async (skillIndex, questionIndex) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/questions/${questions._id}/pin/${skillIndex}/${questionIndex}`,
+        `${API}/api/questions/${questions._id}/pin/${skillIndex}/${questionIndex}`,
         {
           method: 'PATCH',
           headers: {

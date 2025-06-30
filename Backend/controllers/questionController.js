@@ -131,12 +131,14 @@ const getPinnedQuestions = async (req, res) => {
 
     // Filter and format pinned questions
     const pinnedQuestions = questionDocs.flatMap(doc => {
-      return doc.skills.flatMap(skill => {
+      return doc.skills.flatMap((skill, skillIdx) => {  // Add skill index
         return skill.questions
           .filter(q => q.isPinned)
-          .map(q => ({
+          .map((q, qIdx) => ({  // Add question index
             domainId: doc.domainId,
             skillCategory: skill.name,
+            skillIndex: skillIdx,  // Include skillIndex
+            questionIndex: qIdx,   // Include questionIndex
             question: q.question,
             answer: q.answer,
             pinnedAt: doc.lastUpdated
