@@ -20,7 +20,7 @@ async function generateInterviewQuestions(domainData) {
     STRICT REQUIREMENTS:
     1. Return ONLY valid JSON format
     2. Include exactly 6-8 skill categories strictly
-    3. Each category should have 1-15 questions strictly
+    3. Each category should have 15 questions strictly
     4. Each answer should be 80-100 words
     5. Questions should match the experience level
     

@@ -10,7 +10,7 @@ const Auth = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API ;
 
   const toggleForm = () => {
     setIsLogin(!isLogin);

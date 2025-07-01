@@ -4,7 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 
 const DomainQuestions = () => {
-  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API;
   const [questions, setQuestions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

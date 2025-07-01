@@ -8,7 +8,7 @@ const PinnedQuestions = () => {
   const [loading, setLoading] = useState(true);
   const {user} = useContext(UserContext);
   const userId = user?.id;
-  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API ;
 
   useEffect(() => {
     const fetchPinnedQuestions = async () => {

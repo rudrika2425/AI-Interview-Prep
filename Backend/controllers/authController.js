@@ -50,7 +50,7 @@ const login=async(req,res,next)=>{
         if (!seeUser) {
             return res.status(401).json({
                 success: false,
-                message: "Incorrect email or password"
+                message: "User Does not exist"
             });
         }
         

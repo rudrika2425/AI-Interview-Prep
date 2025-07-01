@@ -9,7 +9,7 @@ const ViewNotes = () => {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
-  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API ;
 
   const userId = user?.id;
 

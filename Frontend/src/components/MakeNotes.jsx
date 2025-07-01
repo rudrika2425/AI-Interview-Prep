@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { UserContext } from "../context/userContext";
 
 const MakeNotes = () => {
-  const API = import.meta.env.VITE_API || 'http://localhost:8000';
+  const API = import.meta.env.VITE_API ;
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
