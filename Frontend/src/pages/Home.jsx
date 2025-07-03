@@ -13,7 +13,6 @@ const Home = () => {
     setOpenModal(true);
   };
 
-  // Core functionalities from sidebar
   const coreFunctionalities = [
     {
       icon: <LuTarget className="w-8 h-8" />,
@@ -41,7 +40,7 @@ const Home = () => {
     }
   ];
 
-  // AI Benefits
+ 
   const aiBenefits = [
     {
       icon: <LuBrain className="w-6 h-6" />,
@@ -65,7 +64,7 @@ const Home = () => {
     }
   ];
 
-  // Success Statistics
+ 
   const stats = [
     { number: "50K+", label: "Questions Generated", icon: <LuTarget className="w-5 h-5" /> },
     { number: "95%", label: "Success Rate", icon: <LuTrendingUp className="w-5 h-5" /> },
@@ -76,9 +75,9 @@ const Home = () => {
   return (
     <>
       <div className={`relative transition-all duration-300 ${openModal ? 'blur-sm' : ''}`}>
-        {/* Hero Section with Enhanced Gradient */}
+      
         <div className="relative w-full min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
-          {/* Animated Background Elements */}
+          
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-indigo-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -86,7 +85,7 @@ const Home = () => {
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-6 pt-8 pb-16">
-            {/* Enhanced Header */}
+           
             <div className="flex justify-between items-center mb-16">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">

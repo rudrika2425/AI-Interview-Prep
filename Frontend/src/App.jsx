@@ -12,7 +12,7 @@ import ViewNotes from './components/ViewNotes';
 
 function App() {
   return (
-     <UserProvider>
+     <>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,7 +28,7 @@ function App() {
       </Routes>
     </Router>
     <ToastContainer position="bottom-right" autoClose={3000} />
-    </UserProvider>
+    </>
   );
 }
 
