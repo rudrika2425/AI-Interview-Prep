@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Plus, List, StickyNote, Pin, LogOut } from 'lucide-react';
-import { UserContext } from '../context/userContext';
+import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
