@@ -1,7 +1,7 @@
 import { Search, Bell, Settings, User } from "lucide-react";
 import { useContext } from "react";
 import {Link} from 'react-router-dom';
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 const Navbar = () => {
 
   const {user} = useContext(UserContext);
