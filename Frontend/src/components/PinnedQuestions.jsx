@@ -1,6 +1,6 @@
 import { Pin, Loader2 } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/UserContext"; 
+import { UserContext } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 const PinnedQuestions = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Edit, Trash2, Save, X } from 'lucide-react';
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 
 const ViewNotes = () => {
   const { user } = useContext(UserContext);

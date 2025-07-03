@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/UserContext";
 
 const MakeNotes = () => {
   const API = import.meta.env.VITE_API ;
