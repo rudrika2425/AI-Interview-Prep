@@ -6,7 +6,6 @@ import AddQuestions from './components/AddDomain';
 import ViewList from './components/ViewList';
 import MakeNotes from './components/MakeNotes';
 import PinnedQuestions from './components/PinnedQuestions';
-import { UserProvider } from "./context/UserContext";
 import { ToastContainer } from 'react-toastify';
 import ViewDomain from './pages/ViewDomain';
 import ViewNotes from './components/ViewNotes';
