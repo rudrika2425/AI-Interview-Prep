@@ -1,10 +1,10 @@
-// controllers/questionController.js
+
 const Question = require('../models/Questions');
 const Domain = require('../models/Domain');
 const { generateInterviewQuestions } = require('../services/geminiService');
 const mongoose=require("mongoose");
 
-// Get or generate questions for a domain
+
 const getDomainQuestions = async (req, res) => {
   try {
     const { domainId } = req.params;
@@ -58,18 +58,16 @@ const getDomainQuestions = async (req, res) => {
   }
 };
 
-// Pin/unpin a question
-// controllers/questionController.js
 const togglePinQuestion = async (req, res) => {
   try {
     const { domainId, skillIndex, questionIndex } = req.params;
-    const userId = req.body.userId || req.user?.id; // Support both auth methods
+    const userId = req.body.userId || req.user?.id; 
 
     if (!userId) {
       return res.status(401).json({ message: 'User ID required' });
     }
 
-    // Find the question document by domainId and userId
+    
     const questionDoc = await Question.findOne({ 
       domainId,
       userId 
@@ -79,18 +77,17 @@ const togglePinQuestion = async (req, res) => {
       return res.status(404).json({ message: 'Question set not found' });
     }
 
-    // Validate indices
+ 
     if (!questionDoc.skills[skillIndex] || 
         !questionDoc.skills[skillIndex].questions[questionIndex]) {
       return res.status(400).json({ message: 'Invalid question index' });
     }
 
-    // Toggle pin status
+   
     questionDoc.skills[skillIndex].questions[questionIndex].isPinned = 
       !questionDoc.skills[skillIndex].questions[questionIndex].isPinned;
     
-    questionDoc.markModified('skills'); // Mark array as modified
-    await questionDoc.save();
+    questionDoc.markModified('skills');
 
     res.json({
       success: true,
@@ -107,7 +104,7 @@ const togglePinQuestion = async (req, res) => {
 };
 
 
-// controllers/questionController.js
+
 const getPinnedQuestions = async (req, res) => {
   try {
     const { userId } = req.query;

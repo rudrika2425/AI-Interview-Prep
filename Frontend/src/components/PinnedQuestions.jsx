@@ -48,7 +48,7 @@ const PinnedQuestions = () => {
     console.log(skillIndex);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/questions/${domainId}/unpin/${skillIndex}/${questionIndex}?userId=${userId}`,
+        `${API}/api/questions/${domainId}/unpin/${skillIndex}/${questionIndex}?userId=${userId}`,
         {
           method: 'PATCH',
           headers: {
