@@ -10,7 +10,6 @@ function App() {
     <BrowserRouter>
      <Router>
       <Routes>
-        {/* default route */}
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/interview-prep/:sessionId" element={<InterviewPrep/>}/>
